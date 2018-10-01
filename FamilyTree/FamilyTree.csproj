@@ -5,7 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180930211522_ParentCHild to Person.cs" />
+    <Compile Remove="Migrations\20180930211522_ParentCHild to Person.Designer.cs" />
+    <Compile Remove="Migrations\20180930224320_Self-Referencing.cs" />
+    <Compile Remove="Migrations\20180930224320_Self-Referencing.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.3" />
   </ItemGroup>
 
 </Project>

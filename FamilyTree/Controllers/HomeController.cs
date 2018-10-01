@@ -12,6 +12,14 @@ namespace FamilyTree.Controllers
     {
         public IActionResult Index()
         {
+            List<Person> people;
+            using (var context = new FamilyTreeContext())
+            {
+                var test = from p in context.People
+                                          select p;
+
+                people = test.ToList<Person>();
+            }
             return View();
         }
 

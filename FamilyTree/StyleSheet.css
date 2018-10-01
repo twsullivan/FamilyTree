@@ -1,0 +1,359 @@
+﻿.tree * {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: arial, verdana, tahoma;
+    font-size: 12px;
+    color: #666;
+    background-color: #fff;
+}
+
+.tree {
+    white-space: nowrap;
+    padding-bottom: 250px;
+}
+
+    .tree ul {
+        padding-top: 5px;
+        position: relative;
+        display: table;
+        margin: 0 auto;
+        font-size: 0;
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+    }
+
+    .tree li {
+        /*float: left; */
+        display: inline-block;
+        text-align: center;
+        list-style-type: none;
+        position: relative;
+        padding: 70px 5px 0 5px;
+        font-size: 12px;
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+    }
+
+        /*We will use ::before and ::after to draw the connectors*/
+
+        .tree li::before,
+        .tree li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            border-top: 1px solid #ccc;
+            width: 50%;
+            height: 70px;
+        }
+
+        .tree li::after {
+            right: auto;
+            left: 50%;
+            border-left: 2px solid #ccc;
+        }
+
+        /*We need to remove left-right connectors from elements without 
+any siblings*/
+
+        .tree li:only-child::after {
+            display: none;
+        }
+
+        /*Remove space from the top of single children*/
+
+        /*
+.tree li:only-child{ padding-top: 0;}
+*/
+
+        /*Remove left connector from first child and 
+right connector from last child*/
+
+        .tree li:first-child::before,
+        .tree li:last-child::after {
+            border: 0 none;
+        }
+
+        /*Adding back the vertical connector to the last nodes*/
+
+        .tree li li:last-child::before {
+            border-right: 2px solid #ccc;
+            border-radius: 0 5px 0 0;
+            -webkit-border-radius: 0 5px 0 0;
+            -moz-border-radius: 0 5px 0 0;
+        }
+
+        .tree li:first-child::after {
+            border-radius: 5px 0 0 0;
+            -webkit-border-radius: 5px 0 0 0;
+            -moz-border-radius: 5px 0 0 0;
+        }
+
+        .tree li li:only-child::before {
+            right: auto;
+            left: 50%;
+            border-left: 2px solid #ccc;
+            border-right: none;
+        }
+
+    /*
+.tree ul.p>li::before {
+    border:none;
+    content: '&';
+    left:0;
+    width:100%; 
+    }
+
+.tree ul.p>li::after{
+    content: '';
+    position: absolute; top: 0; right: 50%;
+    border-top: none;
+    width: 50%; height: 20px;
+}
+
+.tree ul.p>li::after{
+    border-left: none;
+}
+*/
+
+    /* Use pf to indicate that its a child of another family. */
+
+    .tree ul.pf > li::before {
+        right: auto;
+        left: 50%;
+        border-left: 2px solid #ccc;
+        border-right: none;
+    }
+
+    .tree ul.pf > li::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 50%;
+        border-top: none;
+        width: 50%;
+        height: 20px;
+    }
+
+    .tree ul.pf > li::after {
+        border-left: none;
+    }
+
+    /*Time to add downward connectors from parents*/
+
+    .tree ul.c {
+        padding-top: 70px;
+    }
+
+    .tree ul ul.c::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        border-left: 2px solid #ccc;
+        width: 0;
+        height: 20px;
+        border: none;
+    }
+
+    .tree li a {
+        border: 1px solid #ccc;
+        padding: 0px;
+        text-decoration: none;
+        color: #666;
+        background-color: #fff;
+        /*background-image:url(circle.jpg)*/
+        /*color: #fff;
+    background-color:#999;*/
+        display: inline-block;
+        min-width: 50px;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+    }
+
+        /* red border on contacts
+.tree li a.o{
+    border: 1px solid #f66;
+}
+*/
+
+        .tree li a span {
+            display: block;
+            font-size: 10px;
+        }
+
+        /*Time for some hover effects*/
+
+        /*We will apply the hover effect the the lineage of the element also*/
+
+        /*.tree li a.m:hover { background: #c8e4f8; color: #000; border: 1px solid #94a0b4; }   
+.tree li a.f:hover { background: #ffc0cb; color: #000; border: 1px solid #94a0b4; } 
+
+.tree li a:hover+ul li a.m { background: #c8e4fb; color: #000; border: 1px solid #94a0b4; } 
+.tree li a:hover+ul li a.f { background: #ffc0cb; color: #000; border: 1px solid #94a0b4; } 
+
+.tree li a.md:hover { background: #c8e4f8; color: #000; border: 1px solid #94a0b4; }    
+.tree li a.fd:hover { background: #ffc0cb; color: #000; border: 1px solid #94a0b4; }    
+
+.tree li a:hover+ul li a.md { background: #c8e4fb; color: #000; border: 1px solid #94a0b4; }    
+.tree li a:hover+ul li a.fd { background: #ffc0cb; color: #000; border: 1px solid #94a0b4; }*/
+
+        .tree li a.m {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            font-size: 10px;
+            color: #000;
+            text-align: center;
+            background: #c8e4fb;
+            box-shadow: 1px 1px 2px #000
+        }
+
+        .tree li a.f {
+            width: 80px;
+            height: 80px;
+            border-radius: 50px;
+            font-size: 10px;
+            color: #000;
+            text-align: center;
+            background: #ffc0cb;
+            box-shadow: 1px 1px 2px #000
+        }
+
+        .tree li a.m_dead {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            font-size: 10px;
+            color: #000;
+            text-align: center;
+            background: #F1F9FE;
+            box-shadow: 1px 1px 2px #000
+        }
+
+        .tree li a.f_dead {
+            width: 80px;
+            height: 80px;
+            border-radius: 50px;
+            font-size: 10px;
+            color: #000;
+            text-align: center;
+            background: #FFF0F2;
+            box-shadow: 1px 1px 2px #000
+        }
+
+        .tree li a.m_nolink {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            font-size: 10px;
+            color: #000;
+            text-align: center;
+            background: #c8e4fb;
+            box-shadow: 1px 1px 2px #000
+        }
+
+        .tree li a.f_nolink {
+            width: 80px;
+            height: 80px;
+            border-radius: 50px;
+            font-size: 10px;
+            color: #000;
+            text-align: center;
+            background: #ffc0cb;
+            box-shadow: 1px 1px 2px #000
+        }
+
+        .tree li a.m_dead_nolink {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            font-size: 10px;
+            color: #000;
+            text-align: center;
+            background: #F1F9FE;
+            box-shadow: 1px 1px 2px #000
+        }
+
+        .tree li a.f_dead_nolink {
+            width: 80px;
+            height: 80px;
+            border-radius: 50px;
+            font-size: 10px;
+            color: #000;
+            text-align: center;
+            background: #FFF0F2;
+            box-shadow: 1px 1px 2px #000
+        }
+
+    .tree li.marriage {
+        height: 0px;
+        border: 1px;
+        border-style: solid;
+        border-color: #000;
+        color: #000;
+        padding: 0;
+        background: #FFF;
+    }
+
+        .tree li.marriage::before {
+            border: none
+        }
+
+    .tree li.divorce {
+        height: 0px;
+        border: 2px;
+        border-style: dashed;
+        border-color: #000;
+        color: #000;
+        padding: 0;
+        background: #FFF;
+    }
+
+        .tree li.divorce::before {
+            border: none
+        }
+
+    .tree ul.pf > li.parent::before {
+        border: none
+    }
+
+    .tree ul.pf > li.parentWithAncestor::before {
+        border-top: none;
+    }
+
+    .tree div.person {
+        display: inline-block;
+        vertical-align: central;
+        padding: 20px 0px;
+        width: 80px;
+    }
+
+/*
+.tree li a.m:hover{width:100px;height:100px;border-radius:15px;font-size:12px;color:#000;text-align:center;background: #c8e4fb; box-shadow:0 0 4px #222 inset}
+.tree li a.f:hover{width:100px;height:100px;border-radius:50px;font-size:12px;color:#000;text-align:center;background: #ffc0cb; box-shadow:0 0 4px #222 inset}
+.tree li a.m_dead:hover{width:100px;height:100px;border-radius:15px;font-size:12px;color:#000;text-align:center;background: #F1F9FE; box-shadow:0 0 4px #222 inset}
+.tree li a.f_dead:hover{width:100px;height:100px;border-radius:50px;font-size:12px;color:#000;text-align:center;background: #FFF0F2; box-shadow:0 0 4px #222 inset}
+*/
+
+/*.tree li a.m { background: #c8e4f8; color: #000; border: 1px solid #94a0b4; } 
+.tree li a.f { background: #ffc0cb; color: #000; border: 1px solid #94a0b4; }   
+
+.tree li a.md { background: #c8e4f8; color: #000; border: 1px solid #94a0b4; }  
+.tree li a.fd { background: #ffc0cb; color: #000; border: 1px solid #94a0b4; }  
+
+.tree li a+ul li a.m { background: #c8e4fb; color: #000; border: 1px solid #94a0b4; }   
+.tree li a+ul li a.f { background: #ffc0cb; color: #000; border: 1px solid #94a0b4; }*/
+
+/*Thats all. I hope you enjoyed it.
+Thanks :)*/
+
